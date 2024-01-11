@@ -79,6 +79,21 @@ public class ProduitService {
         }
 
     }
-    
+    public void supprimerProduit(Long id) {
+        if (!produitExisteParId(id)) {
+            System.out.println("Erreur : Produit non trouvé avec l'ID " + id);
+            return;
+        }
+
+        Iterator<Produit> iterator = produits.iterator();
+        while (iterator.hasNext()) {
+            Produit produit = iterator.next();
+            if (produit.getId().equals(id)) {
+                iterator.remove();
+                System.out.println("Produit supprimé avec succès. ID : " + id);
+                return;
+            }
+        }
+    }
     
 }
