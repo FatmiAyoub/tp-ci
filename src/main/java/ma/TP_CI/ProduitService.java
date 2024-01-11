@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import ma.ehei_github_ci.Produit;
+
 public class ProduitService {
 	private List<Produit> produits;
 
@@ -39,5 +41,20 @@ public class ProduitService {
             }
         }
         return false;
+    }
+    
+    public void ajouterProduit(Produit nouveauProduit) {
+        if (produitExisteParId(nouveauProduit.getId()) || produitExisteParNom(nouveauProduit.getNom())) {
+            System.out.println("Erreur : Un produit avec le même ID ou nom existe déjà.");
+            return;
+        }
+
+        if (nouveauProduit.getPrix() < 0 || nouveauProduit.getQuantite() < 0) {
+            System.out.println("Erreur : Le prix et la quantité des produits doivent être positifs.");
+            return;
+        }
+
+        produits.add(nouveauProduit);
+        System.out.println("Produit ajouté avec succès : " + nouveauProduit);
     }
 }
